@@ -28,10 +28,9 @@ vector<string> filterWordsByLen(int wordLen, const vector<string>& vocabulary)
 {
     vector<string> answer;
     //Write your code here
-    int t=vocabulary.size();
-    for(int i=0;i<t;i++){
-        if((int)vocabulary[i].length()==wordLen){
-            answer.push_back(vocabulary[i]);
+    for(auto& i:answer){
+        if(i.length()==wordLen){
+            answer.push_back(i);
         }
     }
     return answer;
@@ -64,14 +63,9 @@ map<char, int> countOccurrences(const vector<string>& candidateWords)
     map<char, int> answer;
     //Write your code here
     int t=candidateWords.size();
-    for(int i=0;i<t;i++){
-        for(int j=0;j<(int)candidateWords[i].length();j++){
-            answer[candidateWords[i][j]]=0;
-        }
-    }
-    for(int i=0;i<t;i++){
-        for(int j=0;j<(int)candidateWords[i].length();j++){
-            answer[candidateWords[i][j]]++;
+    for(auto& i:candidateWords){
+        for(auto& j:i){
+            answer[j]++;
         }
     }
     return answer;
@@ -89,7 +83,16 @@ char findMostFrequentChar(const map<char, int>& occurrences, const set<char>& se
 {
     char answer;
     //Write your code here
-    
+    map<char, int> cnt = occurrences;
+
+    for (char cur = 'a'; cur <= 'z'; cur++) {
+        if (selectedChars.find(cur) != selectedChars.end()) {
+            continue;
+        }
+
+        if (!answer) answer = cur;
+        else if (cnt[cur] > cnt[answer]) answer = cur;
+    }
     return answer;
 }
 
@@ -105,6 +108,7 @@ char findBestChar(const vector<string>& candidateWords, const set<char>& selecte
 {
     char answer;
     //Write your code here
+
     return answer;
 }
 
@@ -129,6 +133,7 @@ bool isCorrectChar(char ch, const string& mask)
 {
     bool answer;
     //Write your code here
+
     return answer;
 }
 
@@ -142,8 +147,14 @@ bool isCorrectChar(char ch, const string& mask)
 ***/
 bool isWholeWord(const string& mask)
 {
-     bool answer;
+     bool answer=true;
     //Write your code here
+    for(int i=0;i<(int)mask.length();i++){
+        if(mask[i]=='_'){
+            answer =false;
+            break;
+        }
+    }
     return answer;
 }
 
