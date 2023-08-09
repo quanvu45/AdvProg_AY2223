@@ -16,6 +16,7 @@ Snake::Snake(Game& _game, Position start)
 
 Snake::~Snake()
 {
+    
     /*
         Loop: SnakeNode p = tail; p != nullptr;
         
